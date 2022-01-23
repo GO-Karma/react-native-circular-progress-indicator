@@ -45,7 +45,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   subtitleStyle = {},
   subtitleColor,
   subtitleFontSize,
-  containerStyle = {}
+  outerStrokeColor = "rgba(0,0,0,0.3)",
+  outerStrokeWidth = 10,
+  outerStrokeOpacity = 1
 }) => {
   const styleProps = {
     radius,
@@ -99,7 +101,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   }, [value]);
 
   return (
-    <View style={containerStyle}>
+    <View>
       <Svg
         width={radius * 2}
         height={radius * 2}
@@ -114,6 +116,14 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
           </Defs>
         ) : null}
         <G rotation={"-90"} origin={`${viewBox}, ${viewBox}`}>
+          <Circle
+            cx="50%"
+            cy="50%"
+            stroke={outerStrokeColor}
+            strokeWidth={outerStrokeWidth}
+            r={radius}
+            strokeOpacity={outerStrokeOpacity}
+          />
           <Circle
             cx="50%"
             cy="50%"

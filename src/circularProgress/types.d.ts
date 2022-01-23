@@ -122,9 +122,17 @@ export interface CircularProgressProps {
      */
     subtitleFontSize?: number,
     /**
-     * container style
+     * outer circle stroke color
      */
-    containerStyle?: StyleProp<ViewStyle>,
+    outerStrokeColor?: string,
+    /**
+     * outer circle stroke width
+     */
+    outerStrokeWidth?: number,
+    /**
+     * outer circle stroke opacity
+     */
+    outerStrokeOpacity?: number,
 }
 declare const CircularProgress: React.FC<CircularProgressProps>;
 export declare const dynamicStyles: (props: any) => {
