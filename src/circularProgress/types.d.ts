@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleProp, TextStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 export interface CircularProgressProps {
     /**
      * progress value
@@ -121,6 +121,10 @@ export interface CircularProgressProps {
      * subtitle text font size
      */
     subtitleFontSize?: number,
+    /**
+     * container style
+     */
+    containerStyle?: StyleProp<ViewStyle>,
 }
 declare const CircularProgress: React.FC<CircularProgressProps>;
 export declare const dynamicStyles: (props: any) => {

@@ -45,6 +45,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   subtitleStyle = {},
   subtitleColor,
   subtitleFontSize,
+  containerStyle = {}
 }) => {
   const styleProps = {
     radius,
@@ -98,7 +99,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   }, [value]);
 
   return (
-    <View>
+    <View style={containerStyle}>
       <Svg
         width={radius * 2}
         height={radius * 2}
