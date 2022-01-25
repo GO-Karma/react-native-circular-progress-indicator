@@ -8,6 +8,7 @@ import Animated, {
   withDelay,
   runOnJS,
   useDerivedValue,
+  Easing
 } from "react-native-reanimated";
 import { CircularProgressProps } from "./types";
 
@@ -92,7 +93,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   useEffect(() => {
     animatedValue.value = withDelay(
       delay,
-      withTiming(value, { duration }, (isFinished) => {
+      withTiming(value, { duration, easing: Easing.bezier(0.3, 0.8, 0, 1) } }, (isFinished) => {
         if (isFinished) {
           runOnJS(onAnimationComplete)?.();
         }
