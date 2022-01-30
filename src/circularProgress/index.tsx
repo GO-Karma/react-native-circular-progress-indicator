@@ -46,9 +46,11 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   subtitleStyle = {},
   subtitleColor,
   subtitleFontSize,
+  outer = false,
   outerStrokeColor = "rgba(0,0,0,0.3)",
   outerStrokeWidth = 10,
-  outerStrokeOpacity = 1
+  outerStrokeOpacity = 1,
+  bezierEasing = false
 }) => {
   const styleProps = {
     radius,
@@ -93,7 +95,7 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   useEffect(() => {
     animatedValue.value = withDelay(
       delay,
-      withTiming(value, { duration, easing: Easing.bezier(0.3, 0.8, 0, 1) }, (isFinished) => {
+      withTiming(value, { duration, ...(bezierEasing && { easing: Easing.bezier(0.3, 0.8, 0, 1) }) }, (isFinished) => {
         if (isFinished) {
           runOnJS(onAnimationComplete)?.();
         }
@@ -117,7 +119,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
           </Defs>
         ) : null}
         <G rotation={"-90"} origin={`${viewBox}, ${viewBox}`}>
-          <Circle
+          {
+            outer &&  (
+              <Circle
             cx="50%"
             cy="50%"
             stroke={outerStrokeColor}
@@ -125,6 +129,8 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
             r={radius}
             strokeOpacity={outerStrokeOpacity}
           />
+            )
+          }
           <Circle
             cx="50%"
             cy="50%"

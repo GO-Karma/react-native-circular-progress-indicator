@@ -122,6 +122,10 @@ export interface CircularProgressProps {
      */
     subtitleFontSize?: number,
     /**
+     * show outer circle
+     */
+    outer?: boolean
+    /**
      * outer circle stroke color
      */
     outerStrokeColor?: string,
@@ -133,6 +137,10 @@ export interface CircularProgressProps {
      * outer circle stroke opacity
      */
     outerStrokeOpacity?: number,
+    /**
+     * add easing bezier
+     */
+    bezierEasing?: boolean
 }
 declare const CircularProgress: React.FC<CircularProgressProps>;
 export declare const dynamicStyles: (props: any) => {
