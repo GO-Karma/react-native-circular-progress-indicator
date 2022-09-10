@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View, TextInput, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Text,
+  InteractionManager,
+} from "react-native";
 import Svg, { G, Circle, Defs, LinearGradient, Stop } from "react-native-svg";
 import Animated, {
   useSharedValue,
@@ -93,14 +99,23 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   });
 
   useEffect(() => {
-    animatedValue.value = withDelay(
-      delay,
-      withTiming(value, { duration, ...(bezierEasing && { easing: Easing.bezier(0.3, 0.8, 0, 1) }) }, (isFinished) => {
-        if (isFinished) {
-          runOnJS(onAnimationComplete)?.();
-        }
-      })
-    );
+    InteractionManager.runAfterInteractions(() => {
+      animatedValue.value = withDelay(
+        delay,
+        withTiming(
+          value,
+          {
+            duration,
+            ...(bezierEasing && { easing: Easing.bezier(0.3, 0.8, 0, 1) }),
+          },
+          (isFinished) => {
+            if (isFinished) {
+              runOnJS(onAnimationComplete)?.();
+            }
+          }
+        )
+      );
+    })
   }, [value]);
 
   return (
